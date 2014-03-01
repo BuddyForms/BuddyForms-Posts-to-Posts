@@ -48,7 +48,9 @@ function bf_posts_to_posts_add_form_element_in_sidebar($form, $selected_post_typ
 add_filter('buddyforms_add_form_element_in_sidebar','bf_posts_to_posts_add_form_element_in_sidebar',1,2);
 
 function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form_slug,$customfield,$customfield_val){
-    global $buddyforms;
+    global $buddyforms, $WP_Query;
+
+
 
     if($customfield['type']  == 'posts-to-posts'){
 
@@ -64,27 +66,34 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
 
 
         $args = array(
-            'post_type'     => 'page',
-            'echo'          => false
+            'post_type'     => $posts_to_posts_to_value,
 
         );
+        $the_query = new WP_Query( $args );
 
-        $dropdown = wp_dropdown_pages($args);
 
-        if (isset($customfield['multiple']) && is_array( $customfield['multiple'] ))
-            $dropdown = str_replace('id=', 'multiple="multiple" class="postform chosen" id=', $dropdown);
+        if ( $the_query->have_posts() ) {
+            $options_none['none'] = 'none';
 
-        if (is_array($customfield_val)) {
-            foreach ($customfield_val as $value) {
-                $dropdown = str_replace(' value="' . $value . '"', ' value="' . $value . '" selected="selected"', $dropdown);
+
+            while ( $the_query->have_posts() ) {
+                $the_query->the_post();
+                $options[get_the_title()] = get_the_title();
             }
         }
+        $options = array_merge($options_none,$options);
 
-        $element = new Element_HTML('<label>'.$customfield['name'] . ':</label><p><i>' . $customfield['description'] . '</i></p>');
-        bf_add_element($form, $element);
+        $post = get_post($post_id);
 
-        $element = new Element_HTML($dropdown);
-        bf_add_element($form, $element);
+        if(is_array($options)){
+
+
+            $element = new Element_Select($customfield['name'], $customfield_val, $options, $element_attr);
+            if (isset($customfield['multiple']) && is_array( $customfield['multiple'] ))
+                $element->setAttribute('multiple', 'multiple');
+
+            bf_add_element($form, $element);
+        }
 
 
 
@@ -121,11 +130,6 @@ function bf_posts_to_posts_form_element_add_field_ge($form_fields, $form_slug, $
 
     $form_fields['left']['posts_to_posts_from'] 	= new Element_Select("from:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_from]", $post_types, array('value' => $posts_to_posts_from_value));
     $form_fields['left']['posts_to_posts_to'] 	= new Element_Select("to:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_to]", $post_types, array('value' => $posts_to_posts_to_value));
-
-    $multiple = 'false';
-    if(isset($buddyforms_options['buddyforms'][$form_slug]['form_fields'][$field_id]['multiple']))
-        $multiple = $buddyforms_options['buddyforms'][$form_slug]['form_fields'][$field_id]['multiple'];
-    $form_fields['left']['multiple'] = new Element_Checkbox("Multiple:","buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][multiple]",array(''),array('value' => $multiple));
 
     return $form_fields;
 }
