@@ -58,7 +58,7 @@ function bf_posts_to_posts_updtae_post_meta($customfield, $post_id){
         if(!isset($_POST[ $customfield[ 'slug' ] ]))
             return;
 
-        // Get the connnections
+        // Get the connections
         $connections = $_POST[ $customfield[ 'slug' ] ];
 
         // Get the connected post ID's
@@ -72,7 +72,7 @@ function bf_posts_to_posts_updtae_post_meta($customfield, $post_id){
             wp_reset_postdata();
         endif;
 
-        // Create connection from the form values
+        // Create connections from the form values
         if( isset( $connections ) ) {
             foreach ( $connections as $connection) {
                 p2p_type( $customfield[ 'slug' ] )->connect( $post_id, $connection, array(
@@ -105,7 +105,7 @@ function bf_posts_to_posts_add_form_element_in_sidebar($form, $selected_post_typ
 add_filter('buddyforms_create_edit_form_display_element','bf_posts_to_posts_create_edit_form_display_element',1,5);
 function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form_slug,$customfield,$customfield_val){
 
-    //  If the custom field type is not posts-to-posts get out off here ;-)
+    //  If the custom field type is not posts-to-posts get out of here ;-)
     if($customfield['type']  != 'posts-to-posts')
         return $form;
 
