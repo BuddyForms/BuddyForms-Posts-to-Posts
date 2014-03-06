@@ -52,17 +52,35 @@ function bf_posts_to_posts_updtae_post_meta($customfield, $post_id){
     if(!isset($form_slug))
         return;
 
+
     if( $customfield['type'] == 'posts-to-posts' ){
 
-        $connections = $_POST[ $customfield['slug'] ];
-        // Create connection
+        if(!isset($_POST[ $customfield[ 'slug' ] ]))
+            return;
+
+        // Get the connnections
+        $connections = $_POST[ $customfield[ 'slug' ] ];
+
+        // Get the connected post ID's
+        $connected = p2p_type( $customfield[ 'slug' ] )->get_connected( $post_id );
+
+        // Delete all connected ID's
+        if ( $connected->have_posts() ) :
+            while ( $connected->have_posts() ) : $connected->the_post();
+                p2p_type( $customfield[ 'slug' ] )->disconnect( $post_id, get_the_ID() );
+            endwhile;
+            wp_reset_postdata();
+        endif;
+
+        // Create connection from the form values
         if( isset( $connections ) ) {
             foreach ( $connections as $connection) {
-                p2p_type( 'post-to-post' )->connect( $post_id, $connection, array(
+                p2p_type( $customfield[ 'slug' ] )->connect( $post_id, $connection, array(
                     'date' => current_time('mysql')
                 ) );
             }
         }
+
     }
 }
 
@@ -86,18 +104,29 @@ function bf_posts_to_posts_add_form_element_in_sidebar($form, $selected_post_typ
  */
 add_filter('buddyforms_create_edit_form_display_element','bf_posts_to_posts_create_edit_form_display_element',1,5);
 function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form_slug,$customfield,$customfield_val){
-    global $buddyforms, $WP_Query;
 
-    if($customfield['type']  == 'posts-to-posts'){
+    //  If the custom field type is not posts-to-posts get out off here ;-)
+    if($customfield['type']  != 'posts-to-posts')
+        return $form;
 
-        $posts_to_posts_to_value = '';
-        if(isset($customfield['posts_to_posts_to']))
-            $posts_to_posts_to_value	= $customfield['posts_to_posts_to'];
+    $customfield_to = '';
+    if(isset($customfield['posts_to_posts_to']))
+        $customfield_to	= $customfield['posts_to_posts_to'];
 
-        $element_attr = isset($customfield['required']) ? array('required' => true, 'value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']) : array('value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']);
+    $element_attr = isset($customfield['required']) ? array('required' => true, 'value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']) : array('value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']);
+
+
+    if($customfield_to == 'user'){
+        $user_query = new WP_User_Query();
+        if ( ! empty( $user_query->results ) ) {
+            foreach ( $user_query->results as $user ) {
+                $options[$user->display_name] = $user->display_name;
+            }
+        }
+    } else {
 
         $args = array(
-            'post_type'     => $posts_to_posts_to_value,
+            'post_type'     => $customfield_to,
         );
 
         $the_query = new WP_Query( $args );
@@ -110,15 +139,17 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
             }
         }
 
-        if(is_array($options)){
+    }
 
-            $element = new Element_Select($customfield['name'], $customfield['slug'], $options, $element_attr);
-            $element->setAttribute('multiple', 'multiple');
+    if(is_array($options)){
 
-            bf_add_element($form, $element);
-        }
+        $element = new Element_Select($customfield['name'], $customfield['slug'], $options, $element_attr);
+        $element->setAttribute('multiple', 'multiple');
+
+        bf_add_element($form, $element);
 
     }
+
     return $form;
 
 }
@@ -134,14 +165,17 @@ function bf_posts_to_posts_form_element_add_field_ge($form_fields, $form_slug, $
     if($field_type != 'posts-to-posts')
         return $form_fields;
 
-    $posts_to_posts_from_value = '';
+    // Get the from value
+    $customfield_from = '';
     if(isset($buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_from']))
-        $posts_to_posts_from_value	= $buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_from'];
-    $posts_to_posts_to_value = '';
-    if(isset($buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_to']))
-        $posts_to_posts_to_value	= $buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_to'];
+        $customfield_from	= $buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_from'];
 
-// Get all post types
+    // Get the to value
+    $customfield_to = '';
+    if(isset($buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_to']))
+        $customfield_to	= $buddyforms['buddyforms'][$form_slug]['form_fields'][$field_id]['posts_to_posts_to'];
+
+    // Get all post types
     $args=array(
         'public' => true,
         'show_ui' => true
@@ -149,11 +183,10 @@ function bf_posts_to_posts_form_element_add_field_ge($form_fields, $form_slug, $
     $output = 'names'; // names or objects, note: names is the default
     $operator = 'and'; // 'and' or 'or'
     $post_types = get_post_types($args,$output,$operator);
-    $post_types_none['none'] = 'none';
-    $post_types = array_merge($post_types_none,$post_types);
+    $post_types['user'] = 'user';
 
-    $form_fields['left']['posts_to_posts_from'] 	= new Element_Select("from:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_from]", $post_types, array('value' => $posts_to_posts_from_value));
-    $form_fields['left']['posts_to_posts_to'] 	= new Element_Select("to:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_to]", $post_types, array('value' => $posts_to_posts_to_value));
+    $form_fields['right']['posts_to_posts_from'] 	= new Element_Select("from:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_from]", $post_types, array('value' => $customfield_from));
+    $form_fields['right']['posts_to_posts_to'] 	= new Element_Select("to:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_to]", $post_types, array('value' => $customfield_to));
 
     return $form_fields;
 }
