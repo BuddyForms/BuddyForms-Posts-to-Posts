@@ -44,8 +44,8 @@ function bf_posts_to_posts_connection_types() {
  * @param string the post id
  *
  */
-add_action('buddyforms_update_post_meta', 'bf_posts_to_posts_updtae_post_meta', 99, 2);
-function bf_posts_to_posts_updtae_post_meta($customfield, $post_id){
+add_action('buddyforms_update_post_meta', 'bf_posts_to_posts_update_post_meta', 99, 2);
+function bf_posts_to_posts_update_post_meta($customfield, $post_id){
 
     $form_slug = get_post_meta($post_id, '_bf_form_slug', true);
 
@@ -61,16 +61,37 @@ function bf_posts_to_posts_updtae_post_meta($customfield, $post_id){
         // Get the connections
         $connections = $_POST[ $customfield[ 'slug' ] ];
 
-        // Get the connected post ID's
-        $connected = p2p_type( $customfield[ 'slug' ] )->get_connected( $post_id );
 
-        // Delete all connected ID's
-        if ( $connected->have_posts() ) :
-            while ( $connected->have_posts() ) : $connected->the_post();
-                p2p_type( $customfield[ 'slug' ] )->disconnect( $post_id, get_the_ID() );
-            endwhile;
-            wp_reset_postdata();
-        endif;
+        // if the form element 'to' value is 'user' delete all users otherwise delete all post ID's
+        if($customfield['posts_to_posts_to'] == 'user'){
+
+            // Get the connected user ID's
+            $connected =  new WP_User_Query( array(
+                'connected_type' => $customfield[ 'slug' ],
+                'connected_items' => $user,
+            ) );
+
+            if ( ! empty( $connected->results ) ) {
+                foreach ( $connected->results as $user ) {
+                    p2p_type( $customfield[ 'slug' ] )->disconnect( $post_id, $user->ID );
+                }
+            }
+
+        } else {
+
+            // Get the connected post ID's
+            $connected = p2p_type( $customfield[ 'slug' ] )->get_connected( $post_id );
+
+            // Delete all connected ID's
+            if ( $connected->have_posts() ) :
+                while ( $connected->have_posts() ) : $connected->the_post();
+                    p2p_type( $customfield[ 'slug' ] )->disconnect( $post_id, get_the_ID() );
+                endwhile;
+                wp_reset_postdata();
+            endif;
+
+        }
+
 
         // Create connections from the form values
         if( isset( $connections ) ) {
@@ -115,7 +136,7 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
 
     $element_attr = isset($customfield['required']) ? array('required' => true, 'value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']) : array('value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']);
 
-
+    // If the custom field 'to' option is sett to 'user' display user otherwise display posts
     if($customfield_to == 'user'){
         global $wpdb;
 
@@ -129,7 +150,6 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
         }
 
     } else {
-
         $args = array(
             'post_type'     => $customfield_to,
         );
@@ -146,6 +166,7 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
 
     }
 
+    // If posts or users exist create the form element
     if(is_array($options)){
 
         $element = new Element_Select($customfield['name'], $customfield['slug'], $options, $element_attr);
@@ -188,9 +209,10 @@ function bf_posts_to_posts_form_element_add_field_ge($form_fields, $form_slug, $
     $output = 'names'; // names or objects, note: names is the default
     $operator = 'and'; // 'and' or 'or'
     $post_types = get_post_types($args,$output,$operator);
-    $post_types['user'] = 'user';
+
 
     $form_fields['right']['posts_to_posts_from'] 	= new Element_Select("from:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_from]", $post_types, array('value' => $customfield_from));
+    $post_types['user'] = 'user';
     $form_fields['right']['posts_to_posts_to'] 	= new Element_Select("to:", "buddyforms_options[buddyforms][".$form_slug."][form_fields][".$field_id."][posts_to_posts_to]", $post_types, array('value' => $customfield_to));
 
     return $form_fields;
