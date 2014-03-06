@@ -117,12 +117,17 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
 
 
     if($customfield_to == 'user'){
-        $user_query = new WP_User_Query();
-        if ( ! empty( $user_query->results ) ) {
-            foreach ( $user_query->results as $user ) {
-                $options[$user->display_name] = $user->display_name;
-            }
+        global $wpdb;
+
+        $wp_user_search = $wpdb->get_results("SELECT ID, display_name FROM $wpdb->users ORDER BY ID");
+
+        foreach ( $wp_user_search as $userid ) {
+            $user_id       = (int) $userid->ID;
+            $display_name  = stripslashes($userid->display_name);
+
+            $options[$user_id] = $display_name;
         }
+
     } else {
 
         $args = array(
