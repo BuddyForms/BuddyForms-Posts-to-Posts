@@ -42,6 +42,17 @@ function bf_posts_to_posts_connection_types() {
     }
 }
 
+/*add_filter('connection_types_args', 'add_connection_parameter', 99, 2);
+
+function add_connection_parameter($args, $form_slug){
+    if($form_slug != 'movies')
+        return $args;
+
+    $args = array_merge($args, array( 'title' => 'Ein Title' ));
+
+    return $args;
+}*/
+
 /*
  * Save new connections on post save
  *
