@@ -20,38 +20,35 @@ add_action( 'p2p_init', 'bf_posts_to_posts_connection_types' );
 function bf_posts_to_posts_connection_types() {
     global $buddyforms, $post;
 
+    if(!isset($buddyforms['buddyforms']))
+        return;
+
     foreach ($buddyforms['buddyforms'] as $key => $buddyform) {
-        foreach ($buddyform['form_fields'] as $field) {
 
-            if($field['type'] === 'posts-to-posts'){
+        if( !isset( $buddyform['form_fields'] ) ) {
 
+            foreach ($buddyform['form_fields'] as $field) {
 
-                $args = array(
-                    'name'  => $field['slug'],
-                    'from'  => $field['posts_to_posts_from'],
-                    'to'    => $field['posts_to_posts_to']
-                );
+                if($field['type'] === 'posts-to-posts'){
 
-                $args  = apply_filters('connection_types_args', $args, $buddyform['slug']);
+                    $args = array(
+                        'name'  => $field['slug'],
+                        'from'  => $field['posts_to_posts_from'],
+                        'to'    => $field['posts_to_posts_to']
+                    );
 
-                p2p_register_connection_type($args);
+                    $args  = apply_filters('connection_types_args', $args, $buddyform['slug']);
+
+                    p2p_register_connection_type($args);
+
+                }
 
             }
 
         }
+
     }
 }
-
-/*add_filter('connection_types_args', 'add_connection_parameter', 99, 2);
-
-function add_connection_parameter($args, $form_slug){
-    if($form_slug != 'movies')
-        return $args;
-
-    $args = array_merge($args, array( 'title' => 'Ein Title' ));
-
-    return $args;
-}*/
 
 /*
  * Save new connections on post save
