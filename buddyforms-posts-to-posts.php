@@ -25,11 +25,16 @@ function bf_posts_to_posts_connection_types() {
 
             if($field['type'] === 'posts-to-posts'){
 
-                p2p_register_connection_type( array(
-                    'name' => $field['slug'],
-                    'from' => $field['posts_to_posts_from'],
-                    'to' => $field['posts_to_posts_to']
-                ) );
+
+                $args = array(
+                    'name'  => $field['slug'],
+                    'from'  => $field['posts_to_posts_from'],
+                    'to'    => $field['posts_to_posts_to']
+                );
+
+                $args  = apply_filters('connection_types_args', $buddyform['slug'], $args);
+
+                p2p_register_connection_type($args);
 
             }
 
