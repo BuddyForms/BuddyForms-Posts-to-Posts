@@ -25,7 +25,7 @@ function bf_posts_to_posts_connection_types() {
 
     foreach ($buddyforms['buddyforms'] as $key => $buddyform) {
 
-        if( !isset( $buddyform['form_fields'] ) ) {
+        if( isset( $buddyform['form_fields'] ) ) {
 
             foreach ($buddyform['form_fields'] as $field) {
 
