@@ -32,7 +32,7 @@ function bf_posts_to_posts_connection_types() {
                     'to'    => $field['posts_to_posts_to']
                 );
 
-                $args  = apply_filters('connection_types_args', $buddyform['slug'], $args);
+                $args  = apply_filters('connection_types_args', $args, $buddyform['slug']);
 
                 p2p_register_connection_type($args);
 
