@@ -165,6 +165,7 @@ function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form
     } else {
         $args = array(
             'post_type'     => $customfield_to,
+            'posts_per_page' => '-1',
         );
 
         $the_query = new WP_Query( $args );
