@@ -3,9 +3,9 @@
 /*
 Plugin Name: BuddyForms Posts to Posts
 Plugin URI: http://themekraft.com
-Description: BuddyForms Posts to Posts
-Version: 0.1
-Author: Sven Lehnert
+Description: BuddyForms Posts to Posts Integration
+Version: 1.0
+Author: svenl77
 Author URI: http://themekraft.com/members/svenl77/
 Licence: GPLv3
 Network: false
