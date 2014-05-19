@@ -1,4 +1,4 @@
-=== BuddyForms Posts to Posts Integration ===
+=== BuddyForms Posts 2 Posts ===
 
 Contributors: svenl77
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
@@ -8,19 +8,19 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds WP Posts to Posts Plugin Integration to BuddyForms
+Adds WP Posts 2 Posts Plugin Integration to BuddyForms
 
 == Description ==
 
-This is the BuddyForms Posts to Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href="http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" target="_blank">Get BuddyForms now!</a>
+This is the BuddyForms Posts 2 Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href="http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" target="_blank">Get BuddyForms now!</a>
 
-You need the Posts to Posts plugin installed for the plugin to work. For more information on Posts to Posts see here: https://wordpress.org/plugins/posts-to-posts/
+You need the Posts 2 Posts plugin installed for the plugin to work. For more information on Posts 2 Posts see here: https://wordpress.org/plugins/posts-to-posts/
 
 <h4>How it Works</h4>
-With BuddyForms Posts to Posts Integration you can create complex connections and post relationships across your site.
-From posts to pages or to users all the Posts to Posts Plugin functionality is in your BuddyForms Form Builder available.
+With BuddyForms Posts 2 Posts Integration you can create complex connections and post relationships across your site.
+From posts to pages or to users all the Posts 2 Posts Plugin functionality is in your BuddyForms Form Builder available.
 
-With the 'BuddyForms Attach Posts to Groups Extension‘ and the 'Posts to Posts Plugin' you can create groups to posts or even groups to groups relationships based on the Groups Attached Posts.
+With the 'BuddyForms Attach Posts to Groups Extension‘ and the 'Posts 2 Posts Plugin' you can create groups to posts or even groups to groups relationships based on the Groups Attached Posts.
 
 Find out more about 'BuddyForms Attach Posts to Groups Extension' here: http://wordpress.org/plugins/buddyforms-attach-posts-to-groups-extension/
 
@@ -44,7 +44,7 @@ $args = array(<br>
 );<br>
 $args  = apply_filters('connection_types_args', $args, $buddyform['slug']);<br>
 
-There is documentation available for the Posts to Posts Plugin and all the available parameter.
+There is documentation available for the Posts 2 Posts Plugin and all the available parameter.
 
 http://github.com/scribu/wp-posts-to-posts/wiki
 
@@ -60,10 +60,10 @@ You can also create support tickets from the BuddyForms Settings Panel in your W
 
 == Installation ==
 
-You can download and install BuddyForms Posts to Posts Integration using the built in WordPress plugin installer. If you download BuddyForms Posts to Posts Integration manually,
+You can download and install BuddyForms Posts 2 Posts Integration using the built in WordPress plugin installer. If you download BuddyForms Posts 2 Posts Integration manually,
 make sure it is uploaded to "/wp-content/plugins/".
 
-Activate BuddyForms Posts to Posts Integration Plugin in the "Plugins" admin panel using the "Activate" link. If you're using WordPress Multisite, you can optionally activate BuddyForms Posts to Posts Integration Network Wide.
+Activate BuddyForms Posts 2 Posts Integration Plugin in the "Plugins" admin panel using the "Activate" link. If you're using WordPress Multisite, you can optionally activate BuddyForms Posts 2 Posts Integration Network Wide.
 
 == Screenshots ==
 
