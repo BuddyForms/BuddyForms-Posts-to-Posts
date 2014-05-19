@@ -10,7 +10,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Adds WP Posts to Posts Plugin Integration to BuddyForms
 
-
 == Description ==
 
 This is the BuddyForms Posts to Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href="http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" target="_blank">Get BuddyForms now!</a>
@@ -18,17 +17,17 @@ This is the BuddyForms Posts to Posts Integration Extension. You need the BuddyF
 You need the Posts to Posts plugin installed for the plugin to work. For more information on Posts to Posts see here: https://wordpress.org/plugins/posts-to-posts/
 
 <h4>How it Works</h4>
-With BuddyForms Posts to Posts Integration you can create complex connections and post relationships across your Site.
-From Posts to Pages or to Users all the Posts to Posts Plugin functionality is in your BuddyForms Form Builder available.
+With BuddyForms Posts to Posts Integration you can create complex connections and post relationships across your site.
+From posts to pages or to users all the Posts to Posts Plugin functionality is in your BuddyForms Form Builder available.
 
-With the ( BuddyForms Attach Posts to Groups Extension ) and the ( Posts to Posts Plugin ), you can Create Groups to Posts or even Groups to Groups relationships based on the Groups Attached Posts.
+With the 'BuddyForms Attach Posts to Groups Extension‘ and the 'Posts to Posts Plugin' you can create groups to posts or even groups to groups relationships based on the Groups Attached Posts.
 
-Find out more about BuddyForms Attach Posts to Groups Extension here: http://wordpress.org/plugins/buddyforms-attach-posts-to-groups-extension/
+Find out more about 'BuddyForms Attach Posts to Groups Extension' here: http://wordpress.org/plugins/buddyforms-attach-posts-to-groups-extension/
 
 
 <h4>Form Elements</h4>
 
-The Plugin creates a new Form Element "posts-to-posts" with 2 options for your BuddyForms FormBuilder.
+The Plugin creates a new form element "posts-to-posts" with 2 options for your BuddyForms FormBuilder.
 
 from: post, page or any post type<br>
 to: post, page, user, any post type
@@ -36,7 +35,7 @@ to: post, page, user, any post type
 
 <h4>Add Additional Parameter</h4>
 
-Before the connection gets registered with p2p_register_connection_type($args); you can manipulate the $args with a filter.
+Before the connection gets registered with p2p_register_connection_type($args) you can manipulate the $args with a filter.
 
 $args = array(<br>
     'name'  => $field['slug'],<br>
