@@ -9,7 +9,25 @@ Author: svenl77
 Author URI: http://themekraft.com/members/svenl77/
 Licence: GPLv3
 Network: false
-*/
+
+ *****************************************************************************
+ *
+ * This script is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ ****************************************************************************
+ */
 
 
 /*
@@ -122,13 +140,13 @@ function bf_posts_to_posts_update_post_meta($customfield, $post_id){
  * Add a new form element to the form create view sidebar
  *
  * @param object the form object
- * @param array selected post types
+ * @param array selected form
  *
  * @return the form object
  */
-add_filter('buddyforms_add_form_element_in_sidebar','bf_posts_to_posts_add_form_element_in_sidebar',1,2);
-function bf_posts_to_posts_add_form_element_in_sidebar($form, $selected_post_types){
-   $form->addElement(new Element_HTML('<p><a href="posts-to-posts/'.$selected_post_types.'" class="action">Posts to Posts</a></p>'));
+add_filter('buddyforms_add_form_element_to_sidebar','bf_posts_to_posts_add_form_element_to_sidebar',1,2);
+function bf_posts_to_posts_add_form_element_to_sidebar($form, $form_slug){
+   $form->addElement(new Element_HTML('<p><a href="posts-to-posts/'.$form_slug.'" class="action">Posts to Posts</a></p>'));
     return $form;
 }
 
