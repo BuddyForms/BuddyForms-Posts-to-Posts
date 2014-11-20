@@ -154,8 +154,10 @@ function bf_posts_to_posts_add_form_element_to_sidebar($form, $form_slug){
  * Display the form element in the frontend form
  *
  */
-add_filter('buddyforms_create_edit_form_display_element','bf_posts_to_posts_create_edit_form_display_element',1,5);
-function bf_posts_to_posts_create_edit_form_display_element($form,$post_id,$form_slug,$customfield,$customfield_val){
+add_filter('buddyforms_create_edit_form_display_element','bf_posts_to_posts_create_edit_form_display_element',1,2);
+function bf_posts_to_posts_create_edit_form_display_element($form, $form_args){
+
+    extract($form_args);
 
     //  If the custom field type is not posts-to-posts get out of here ;-)
     if($customfield['type']  != 'posts-to-posts')
