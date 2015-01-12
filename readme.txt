@@ -3,8 +3,8 @@
 Contributors: svenl77
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
 Requires at least: WordPress 3.x
-Tested up to: WordPress 3.9.1
-Stable tag: 1.0.1
+Tested up to: WordPress 4.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ Activate BuddyForms Posts 2 Posts Integration Plugin in the "Plugins" admin pane
 coming soon
 
 == Changelog ==
+
+= 1.0.2 =
+changed the hook to $form_args instead of attributes
 
 = 1.0.1 =
 Rename hooks
