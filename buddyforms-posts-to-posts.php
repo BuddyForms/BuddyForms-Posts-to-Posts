@@ -167,7 +167,7 @@ function bf_posts_to_posts_create_edit_form_display_element($form, $form_args){
     if(isset($customfield['posts_to_posts_to']))
         $customfield_to	= $customfield['posts_to_posts_to'];
 
-    $element_attr = isset($customfield['required']) ? array('required' => true, 'value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']) : array('value' => $customfield_val, 'class' => 'settings-input chosen', 'shortDesc' =>  $customfield['description']);
+    $element_attr = isset($customfield['required']) ? array('required' => true, 'value' => $customfield_val, 'class' => 'settings-input bf-select2', 'shortDesc' =>  $customfield['description']) : array('value' => $customfield_val, 'class' => 'settings-input bf-select2', 'shortDesc' =>  $customfield['description']);
 
     // If the custom field 'to' option is sett to 'user' display user otherwise display posts
     if($customfield_to == 'user'){
