@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: BuddyForms Posts 2 Posts
-Plugin URI: http://themekraft.com
+Plugin URI: https://wordpress.org/plugins/buddyforms-posts-to-posts-integration/
 Description: BuddyForms Posts to Posts Integration
 Version: 1.0.2
 Author: svenl77
