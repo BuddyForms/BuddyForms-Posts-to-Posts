@@ -1,6 +1,6 @@
 === BuddyForms Posts 2 Posts ===
 
-Contributors: svenl77
+Contributors: svenl77, buddyforms
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
 Requires at least: WordPress 3.x
 Tested up to: WordPress 4.1
@@ -53,7 +53,7 @@ http://github.com/scribu/wp-posts-to-posts/wiki
 You can find all help buttons in your BuddyForms Settings Panel in your WP Dashboard! 
 
 Documentation
-http://support.themekraft.com/categories/20110697-BuddyForms 
+http://docs.buddyforms.com
 
 Support Tickets
 You can also create support tickets from the BuddyForms Settings Panel in your WP Dashboard!

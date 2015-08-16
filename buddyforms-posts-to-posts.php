@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: BuddyForms Posts 2 Posts
-Plugin URI: https://wordpress.org/plugins/buddyforms-posts-to-posts-integration/
+Plugin URI: http://buddyforms.com/downloads/buddyforms-posts-2-posts/
 Description: BuddyForms Posts to Posts Integration
 Version: 1.0.2
 Author: svenl77
-Author URI: http://themekraft.com/members/svenl77/
+Author URI: https://profiles.wordpress.org/svenl77
 Licence: GPLv3
 Network: false
 
