@@ -2,9 +2,9 @@
 
 Contributors: svenl77, buddyforms
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
-Requires at least: WordPress 3.x
-Tested up to: WordPress 4.1
-Stable tag: 1.0.2
+Requires at least: WordPress 3.9
+Tested up to: WordPress 4.3
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Adds WP Posts 2 Posts Plugin Integration to BuddyForms
 
 == Description ==
 
-This is the BuddyForms Posts 2 Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href="http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" target="_blank">Get BuddyForms now!</a>
+This is the BuddyForms Posts 2 Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href="http://buddyforms.com/" target="_blank">Get BuddyForms now!</a>
 
 You need the Posts 2 Posts plugin installed for the plugin to work. For more information on Posts 2 Posts see here: https://wordpress.org/plugins/posts-to-posts/
 
@@ -70,6 +70,11 @@ Activate BuddyForms Posts 2 Posts Integration Plugin in the "Plugins" admin pane
 coming soon
 
 == Changelog ==
+
+= 1.0.3 =
+switch from choose to select2
+rename session
+change the url to buddyforms.com
 
 = 1.0.2 =
 changed the hook to $form_args instead of attributes
