@@ -144,10 +144,18 @@ function bf_posts_to_posts_update_post_meta($customfield, $post_id){
  *
  * @return the form object
  */
-add_filter('buddyforms_add_form_element_to_sidebar','bf_posts_to_posts_add_form_element_to_sidebar',1,2);
-function bf_posts_to_posts_add_form_element_to_sidebar($form, $form_slug){
-   $form->addElement(new Element_HTML('<p><a href="#" data-fieldtype="posts-to-posts" class="bf_add_element_action">Posts to Posts</a></p>'));
-    return $form;
+add_filter('buddyforms_add_form_element_to_sidebar','bf_posts_to_posts_add_form_element_to_sidebar');
+function bf_posts_to_posts_add_form_element_to_sidebar($sidebar_elements){
+    global $post;
+
+    if($post->post_type != 'buddyforms')
+        return;
+
+
+    $sidebar_elements[] = new Element_HTML('<p><a href="#" data-fieldtype="posts-to-posts" class="bf_add_element_action">Posts to Posts</a></p>');
+
+    return $sidebar_elements;
+
 }
 
 /*
