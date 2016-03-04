@@ -4,7 +4,7 @@ Contributors: svenl77, buddyforms
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
 Requires at least: WordPress 3.9
 Tested up to: WordPress 4.3
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,7 +50,7 @@ http://github.com/scribu/wp-posts-to-posts/wiki
 
 == Documentation & Support ==
 
-You can find all help buttons in your BuddyForms Settings Panel in your WP Dashboard! 
+You can find all help buttons in your BuddyForms Settings Panel in your WP Dashboard!
 
 Documentation
 http://docs.buddyforms.com
@@ -70,6 +70,9 @@ Activate BuddyForms Posts 2 Posts Integration Plugin in the "Plugins" admin pane
 coming soon
 
 == Changelog ==
+
+= 1.0.4 =
+Make it work with the latest version of BuddyForms. the BuddyForms array has changed so I adjust the code too the new structure
 
 = 1.0.3 =
 switch from choose to select2
