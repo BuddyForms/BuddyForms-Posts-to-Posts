@@ -155,7 +155,6 @@ function bf_posts_to_posts_add_form_element_to_sidebar( $sidebar_elements ) {
 		return;
 	}
 
-
 	$sidebar_elements[] = new Element_HTML( '<p><a href="#" data-fieldtype="posts-to-posts" class="bf_add_element_action">Posts to Posts</a></p>' );
 
 	return $sidebar_elements;
@@ -169,10 +168,10 @@ function bf_posts_to_posts_add_form_element_to_select( $elements_select_options 
 		return;
 	}
 
-	$elements_select_options['Posts to Posts'] = array(
-		'posts-to-posts' => array(
-			'label'     => __( 'Posts to Posts', 'buddyforms' ),
-		),
+	$elements_select_options['posts-to-posts']['label'] = 'Posts to Posts';
+	$elements_select_options['posts-to-posts']['fields']['posts-to-posts'] = array(
+		'label'     => __( 'Posts to Posts', 'buddyforms' ),
+		'unique'    => 'unique'
 	);
 
 	return $elements_select_options;
@@ -287,9 +286,25 @@ function bf_posts_to_posts_form_element_add_field_ge( $form_fields, $form_slug, 
 	$post_types = get_post_types( $args, $output, $operator );
 
 
-	$form_fields['general']['posts_to_posts_from'] = new Element_Select( "from:", "buddyforms_options[" . $form_slug . "][form_fields][" . $field_id . "][posts_to_posts_from]", $post_types, array( 'value' => $customfield_from ) );
+	$form_fields['general']['posts_to_posts_from'] = new Element_Select( "from:", "buddyforms_options[form_fields][" . $field_id . "][posts_to_posts_from]", $post_types, array( 'value' => $customfield_from ) );
 	$post_types['user']                            = 'user';
-	$form_fields['general']['posts_to_posts_to']   = new Element_Select( "to:", "buddyforms_options[" . $form_slug . "][form_fields][" . $field_id . "][posts_to_posts_to]", $post_types, array( 'value' => $customfield_to ) );
+	$form_fields['general']['posts_to_posts_to']   = new Element_Select( "to:", "buddyforms_options[form_fields][" . $field_id . "][posts_to_posts_to]", $post_types, array( 'value' => $customfield_to ) );
 
 	return $form_fields;
 }
+
+function buddyforms_posts_to_posts_requirements(){
+
+	if( ! defined( 'P2P_PLUGIN_VERSION' )){
+		add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Posts to Posts needs Posts to Posts to be installed. <a href="%s">Download it now</a>!\', " buddypress" ) . \'</strong></p></div>\', admin_url("plugin-install.php") );' ) );
+		return;
+	}
+
+	if( ! defined( 'BUDDYFORMS_VERSION' )){
+		add_action( 'admin_notices', create_function( '', 'printf(\'<div id="message" class="error"><p><strong>\' . __(\'BuddyForms Posts to Posts needs BuddyForms to be installed. <a target="_blank" href="%s">--> Get it now</a>!\', " buddyforms" ) . \'</strong></p></div>\', "http://themekraft.com/store/wordpress-front-end-editor-and-form-builder-buddyforms/" );' ) );
+		return;
+	}
+
+}
+
+add_action('plugins_loaded', 'buddyforms_posts_to_posts_requirements');
