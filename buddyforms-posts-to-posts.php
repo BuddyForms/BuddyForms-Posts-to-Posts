@@ -4,7 +4,7 @@
 Plugin Name: BuddyForms Posts 2 Posts
 Plugin URI: http://buddyforms.com/downloads/buddyforms-posts-2-posts/
 Description: BuddyForms Posts to Posts Integration
-Version: 1.0.4
+Version: 1.0.6
 Author: svenl77, buddyforms
 Author URI: https://profiles.wordpress.org/svenl77
 Licence: GPLv3
@@ -116,8 +116,9 @@ function bf_posts_to_posts_update_post_meta( $customfield, $post_id ) {
 			// Get the connected post ID's
 			$connected = p2p_type( $customfield['slug'] )->get_connected( $post_id );
 
+
 			// Delete all connected ID's
-			if ( $connected->have_posts() ) :
+			if ( $connected && $connected->have_posts() ) :
 				while ( $connected->have_posts() ) : $connected->the_post();
 					p2p_type( $customfield['slug'] )->disconnect( $post_id, get_the_ID() );
 				endwhile;
