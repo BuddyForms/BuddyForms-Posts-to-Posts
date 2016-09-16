@@ -222,10 +222,18 @@ function bf_posts_to_posts_create_edit_form_display_element( $form, $form_args )
 		}
 
 	} else {
+
+		$current_user = wp_get_current_user();
 		$args = array(
 			'post_type'      => $customfield_to,
 			'posts_per_page' => '-1',
+
 		);
+
+		if( isset($customfield['author_only']) ){
+			$args['author']  = $current_user->ID;
+		}
+
 
 		$the_query = new WP_Query( $args );
 
@@ -243,7 +251,9 @@ function bf_posts_to_posts_create_edit_form_display_element( $form, $form_args )
 	if ( is_array( $options ) ) {
 
 		$element = new Element_Select( $customfield['name'], $customfield['slug'], $options, $element_attr );
-		$element->setAttribute( 'multiple', 'multiple' );
+
+		if(isset($customfield['multiple']))
+			$element->setAttribute( 'multiple', 'multiple' );
 
 		$form->addElement( $element );
 
@@ -259,7 +269,8 @@ function bf_posts_to_posts_create_edit_form_display_element( $form, $form_args )
  */
 add_filter( 'buddyforms_form_element_add_field', 'bf_posts_to_posts_form_element_add_field_ge', 1, 5 );
 function bf_posts_to_posts_form_element_add_field_ge( $form_fields, $form_slug, $field_type, $field_id ) {
-	global $buddyforms;
+	global $buddyform;
+
 
 	if ( $field_type != 'posts-to-posts' ) {
 		return $form_fields;
@@ -267,14 +278,14 @@ function bf_posts_to_posts_form_element_add_field_ge( $form_fields, $form_slug, 
 
 	// Get the from value
 	$customfield_from = '';
-	if ( isset( $buddyforms[ $form_slug ]['form_fields'][ $field_id ]['posts_to_posts_from'] ) ) {
-		$customfield_from = $buddyforms[ $form_slug ]['form_fields'][ $field_id ]['posts_to_posts_from'];
+	if ( isset( $buddyform['form_fields'][ $field_id ]['posts_to_posts_from'] ) ) {
+		$customfield_from = $buddyform['form_fields'][ $field_id ]['posts_to_posts_from'];
 	}
 
 	// Get the to value
 	$customfield_to = '';
-	if ( isset( $buddyforms[ $form_slug ]['form_fields'][ $field_id ]['posts_to_posts_to'] ) ) {
-		$customfield_to = $buddyforms[ $form_slug ]['form_fields'][ $field_id ]['posts_to_posts_to'];
+	if ( isset( $buddyform['form_fields'][ $field_id ]['posts_to_posts_to'] ) ) {
+		$customfield_to = $buddyform['form_fields'][ $field_id ]['posts_to_posts_to'];
 	}
 
 	// Get all post types
@@ -287,9 +298,17 @@ function bf_posts_to_posts_form_element_add_field_ge( $form_fields, $form_slug, 
 	$post_types = get_post_types( $args, $output, $operator );
 
 
-	$form_fields['general']['posts_to_posts_from'] = new Element_Select( "from:", "buddyforms_options[form_fields][" . $field_id . "][posts_to_posts_from]", $post_types, array( 'value' => $customfield_from ) );
+	$form_fields['general']['posts_to_posts_from'] = new Element_Select( '<b>' . __( 'From', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][posts_to_posts_from]", $post_types, array( 'value' => $customfield_from ) );
 	$post_types['user']                            = 'user';
-	$form_fields['general']['posts_to_posts_to']   = new Element_Select( "to:", "buddyforms_options[form_fields][" . $field_id . "][posts_to_posts_to]", $post_types, array( 'value' => $customfield_to ) );
+	$form_fields['general']['posts_to_posts_to']   = new Element_Select( '<b>' . __( 'To', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][posts_to_posts_to]", $post_types, array( 'value' => $customfield_to ) );
+
+	$multiple                           = isset( $buddyform['form_fields'][ $field_id ]['multiple'] ) ? $buddyform['form_fields'][ $field_id ]['multiple'] : 'false';
+	$form_fields['general']['multiple'] = new Element_Checkbox( '<b>' . __( 'Multiple Selection', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][multiple]", array( 'multiple' => __( 'Multiple', 'buddyforms' )  ), array( 'value' => $multiple ) );
+
+	$author_only                           = isset( $buddyform['form_fields'][ $field_id ]['author_only'] ) ? $buddyform['form_fields'][ $field_id ]['author_only'] : 'false';
+	$form_fields['general']['author_only'] = new Element_Checkbox( '<b>' . __( 'Author Posts only?', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][multiple]", array( 'author_only' => __( 'Only display posts of the current logged in user', 'buddyforms' )  ), array( 'value' => $author_only, 'shortDesc' => __('', 'buddyforms' ) ) );
+
+
 
 	return $form_fields;
 }
