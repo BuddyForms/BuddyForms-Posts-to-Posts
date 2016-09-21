@@ -306,7 +306,7 @@ function bf_posts_to_posts_form_element_add_field_ge( $form_fields, $form_slug, 
 	$form_fields['general']['multiple'] = new Element_Checkbox( '<b>' . __( 'Multiple Selection', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][multiple]", array( 'multiple' => __( 'Multiple', 'buddyforms' )  ), array( 'value' => $multiple ) );
 
 	$author_only                           = isset( $buddyform['form_fields'][ $field_id ]['author_only'] ) ? $buddyform['form_fields'][ $field_id ]['author_only'] : 'false';
-	$form_fields['general']['author_only'] = new Element_Checkbox( '<b>' . __( 'Author Posts only?', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][multiple]", array( 'author_only' => __( 'Only display posts of the current logged in user', 'buddyforms' )  ), array( 'value' => $author_only, 'shortDesc' => __('', 'buddyforms' ) ) );
+	$form_fields['general']['author_only'] = new Element_Checkbox( '<b>' . __( 'Author Posts only?', 'buddyforms' ) . '</b>', "buddyforms_options[form_fields][" . $field_id . "][author_only]", array( 'author_only' => __( 'Only display posts of the current logged in user', 'buddyforms' )  ), array( 'value' => $author_only, 'shortDesc' => __('', 'buddyforms' ) ) );
 
 
 
