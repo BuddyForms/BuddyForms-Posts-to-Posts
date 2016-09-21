@@ -170,6 +170,7 @@ function bf_posts_to_posts_add_form_element_to_select( $elements_select_options 
 	}
 
 	$elements_select_options['posts-to-posts']['label'] = 'Posts to Posts';
+	$elements_select_options['posts-to-posts']['class'] = 'bf_show_if_f_type_post';
 	$elements_select_options['posts-to-posts']['fields']['posts-to-posts'] = array(
 		'label'     => __( 'Posts to Posts', 'buddyforms' ),
 		'unique'    => 'unique'
