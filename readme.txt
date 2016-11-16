@@ -1,6 +1,6 @@
 === BuddyForms Posts 2 Posts ===
 
-Contributors: svenl77, buddyforms
+Contributors: svenl77, konradS, buddyforms, themekraft
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
 Requires at least: 3.9
 Tested up to: 4.6.1
@@ -12,7 +12,7 @@ Adds WP Posts 2 Posts Plugin Integration to BuddyForms
 
 == Description ==
 
-This is the BuddyForms Posts 2 Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href="http://buddyforms.com/" target="_blank">Get BuddyForms now!</a>
+This is the BuddyForms Posts 2 Posts Integration Extension. You need the BuddyForms plugin installed for the plugin to work. <a href=https://wordpress.org/plugins/buddyforms/" target="_blank">Get BuddyForms now!</a>
 
 You need the Posts 2 Posts plugin installed for the plugin to work. For more information on Posts 2 Posts see here: https://wordpress.org/plugins/posts-to-posts/
 
