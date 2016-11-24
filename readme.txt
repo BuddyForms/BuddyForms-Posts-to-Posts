@@ -4,7 +4,7 @@ Contributors: svenl77, konradS, buddyforms, themekraft
 Tags: collaborative, publishing, buddypress, groups, custom post types, taxonomy, frontend, posting, editing, forms, form builder, wp-posts-to-posts, post relationship, connections, custom post types, relationships, many-to-many, users
 Requires at least: 3.9
 Tested up to: 4.6.1
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,10 @@ Activate BuddyForms Posts 2 Posts Integration Plugin in the "Plugins" admin pane
 coming soon
 
 == Changelog ==
+
+= 1.0.8 =
+Add dependencies management with tgm
+Rename buddyforms_add_form_element_to_select to buddyforms_add_form_element_select_option
 
 = 1.0.7 =
 New option Select multiple
