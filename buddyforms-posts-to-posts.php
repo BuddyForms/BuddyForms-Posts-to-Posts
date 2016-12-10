@@ -4,7 +4,7 @@
 Plugin Name: BuddyForms Posts 2 Posts
 Plugin URI: http://buddyforms.com/downloads/buddyforms-posts-2-posts/
 Description: BuddyForms Posts to Posts Integration
-Version: 1.0.8
+Version: 1.0.9
 Author: svenl77, buddyforms
 Author URI: https://profiles.wordpress.org/svenl77
 Licence: GPLv3
