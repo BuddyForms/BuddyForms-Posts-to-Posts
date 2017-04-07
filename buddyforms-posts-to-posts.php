@@ -4,7 +4,7 @@
 Plugin Name: BuddyForms Posts 2 Posts
 Plugin URI: https://themekraft.com/products/buddyforms-posts-2-posts/
 Description: BuddyForms Posts to Posts Integration
-Version: 1.0.9
+Version: 1.0.10
 Author: ThemeKraft
 Author URI: http://themekraft.com/
 Licence: GPLv3
