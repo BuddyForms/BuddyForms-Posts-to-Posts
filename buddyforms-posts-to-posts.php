@@ -9,6 +9,7 @@ Author: ThemeKraft
 Author URI: http://themekraft.com/
 Licence: GPLv3
 Network: false
+Text Domain: buddyforms
 
  *****************************************************************************
  *
