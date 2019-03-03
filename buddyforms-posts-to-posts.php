@@ -4,7 +4,7 @@
 Plugin Name: BuddyForms Posts 2 Posts
 Plugin URI: https://themekraft.com/products/buddyforms-posts-2-posts/
 Description: BuddyForms Posts to Posts Integration
-Version: 1.0.10
+Version: 1.1
 Author: ThemeKraft
 Author URI: http://themekraft.com/
 Licence: GPLv3
@@ -374,8 +374,6 @@ function bptpi_fs() {
 		} else if ( file_exists( dirname( dirname( __FILE__ ) ) . '/buddyforms-premium/includes/resources/freemius/start.php' ) ) {
 			// Try to load SDK from premium parent plugin folder.
 			require_once dirname( dirname( __FILE__ ) ) . '/buddyforms-premium/includes/resources/freemius/start.php';
-		} else {
-			require_once dirname(__FILE__) . '/includes/resources/freemius/start.php';
 		}
 
 		$bptpi_fs = fs_dynamic_init( array(
